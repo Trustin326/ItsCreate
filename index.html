@@ -1,4 +1,149 @@
-<!doctype html><meta charset="utf-8">
-<title>Pages Smoke Test</title>
-<h1>If you see this, GitHub Pages works ✅</h1>
-<p>Next, we’ll replace this with your full wedding app.</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wedding MasterPlan – Demo</title>
+  <style>
+  :root { --gold:#d4af37; --ink:#1d1d1f; --muted:#666; --bg:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink)}
+  .container{max-width:1100px;margin:0 auto;padding:24px}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #eee}
+  .btn{display:inline-block;padding:10px 16px;border:1px solid var(--ink);border-radius:10px;text-decoration:none}
+  .btn.primary{background:var(--gold);border-color:var(--gold);color:#fff}
+  .hero{padding:64px 0;text-align:center}
+  .hero h1{font-size:40px;margin:0 0 10px}
+  .hero p{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .card{border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+  .badge{font-size:12px;background:#f7f7f7;border:1px solid #eee;padding:4px 8px;border-radius:999px}
+  .notice{border-left:4px solid var(--gold);background:#fff8e6;padding:12px 16px;border-radius:8px;margin:12px 0}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+  .kudos{display:flex;gap:8px;flex-wrap:wrap}
+  footer{border-top:1px solid #eee;margin-top:32px;padding:24px;text-align:center;color:#777}
+  blockquote,pre{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:8px}
+  </style>
+</head>
+<body>
+  <script>
+  window.APP_CONFIG = {
+    stripePaymentLink: "https://buy.stripe.com/test_12345",   // replace with your real Stripe link
+    warriorPlusLink: "https://warriorplus.com/o/test",        // replace with your WarriorPlus link
+    supabaseUrl: "", supabaseAnonKey: "",
+    aiVowsUrl: "", aiSpeechUrl: "", aiShotUrl: "", aiContractUrl: ""
+  };
+  </script>
+
+  <div class="container">
+    <nav class="nav">
+      <div><strong>Wedding MasterPlan</strong></div>
+      <div>
+        <a id="buyStripe" class="btn primary" href="#">Buy Now (Stripe)</a>
+        <a id="buyWP" class="btn" href="#">Buy on WarriorPlus</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="badge">💍 All-in-one wedding planner</div>
+      <h1>Your Entire Wedding, Planned in One Click</h1>
+      <p>Timelines, budget, RSVPs, seating, design, and AI — right in your browser.</p>
+    </section>
+
+    <section class="notice">
+      <strong>Status:</strong> Demo mode – Supabase & AI optional
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="badge">Snapshot</div>
+        <h2 id="weddingName">—</h2>
+        <p><strong>Date:</strong> <span id="weddingDate">—</span></p>
+        <p><strong>Guests:</strong> <span id="guestCount">—</span></p>
+        <p><strong>Budget Used:</strong> <span id="budgetUsed">—</span></p>
+      </div>
+
+      <div class="card">
+        <h3>Guest List</h3>
+        <table><thead><tr><th>Name</th><th>Email</th><th>RSVP</th></tr></thead>
+        <tbody id="guestRows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h3>Budget</h3>
+        <table><thead><tr><th>Category</th><th>Planned</th><th>Actual</th></tr></thead>
+        <tbody id="budgetRows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h3>Timeline</h3>
+        <ul id="timelineList"></ul>
+      </div>
+
+      <div class="card">
+        <h3>AI Toolkit</h3>
+        <p><strong>Vows:</strong></p><blockquote id="vows"></blockquote>
+        <p><strong>Speech:</strong></p><blockquote id="speech"></blockquote>
+        <p><strong>Shot List:</strong></p><pre id="shotlist"></pre>
+        <p><strong>Contract Summary:</strong></p><blockquote id="contract"></blockquote>
+      </div>
+    </section>
+
+    <footer>© <span id="y"></span> Wedding MasterPlan</footer>
+  </div>
+
+  <script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const demo = {
+    wedding:{name:"Ariana & Malik",date:"2026-06-20",budget:25000},
+    guests:[
+      {name:"Ava Johnson",email:"ava@example.com",rsvp_status:"yes"},
+      {name:"Noah Smith",email:"noah@example.com",rsvp_status:"no"},
+      {name:"Emma Davis",email:"emma@example.com",rsvp_status:"maybe"}
+    ],
+    budget:{total:25000,items:[
+      {category:"Venue",planned:8000,actual:7800},
+      {category:"Catering",planned:7000,actual:7200},
+      {category:"Photography",planned:3000,actual:3000}
+    ]},
+    timeline:[
+      {time:"08:00",title:"Hair & Makeup"},
+      {time:"10:30",title:"Photographer arrives"},
+      {time:"15:00",title:"Ceremony"},
+      {time:"17:30",title:"Reception"}
+    ]
+  };
+
+  function render(){
+    document.getElementById('weddingName').textContent = demo.wedding.name;
+    document.getElementById('weddingDate').textContent = demo.wedding.date;
+    document.getElementById('guestCount').textContent = demo.guests.length;
+    const spend = demo.budget.items.reduce((a,b)=>a+b.actual,0);
+    document.getElementById('budgetUsed').textContent = Math.round(100*spend/demo.budget.total)+"%";
+
+    document.getElementById('guestRows').innerHTML = demo.guests.map(
+      g=>`<tr><td>${g.name}</td><td>${g.email}</td><td>${g.rsvp_status}</td></tr>`
+    ).join("");
+
+    document.getElementById('budgetRows').innerHTML = demo.budget.items.map(
+      i=>`<tr><td>${i.category}</td><td>$${i.planned}</td><td>$${i.actual}</td></tr>`
+    ).join("");
+
+    document.getElementById('timelineList').innerHTML = demo.timeline.map(
+      t=>`<li><strong>${t.time}</strong> – ${t.title}</li>`
+    ).join("");
+
+    document.getElementById('vows').textContent="I choose you today and always... (demo)";
+    document.getElementById('speech').textContent="Good evening, family and friends... (demo)";
+    document.getElementById('shotlist').textContent="- First Look\n- Ring Exchange (demo)";
+    document.getElementById('contract').textContent="Deposit %, reschedule policy, delivery timelines (demo)";
+
+    const C=window.APP_CONFIG;
+    if(C.stripePaymentLink) document.getElementById('buyStripe').href=C.stripePaymentLink;
+    if(C.warriorPlusLink) document.getElementById('buyWP').href=C.warriorPlusLink;
+  }
+  render();
+  </script>
+</body>
+</html>
