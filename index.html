@@ -5,34 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wedding MasterPlan – Demo</title>
   <style>
-  :root { --gold:#d4af37; --ink:#1d1d1f; --muted:#666; --bg:#fff; }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink)}
-  .container{max-width:1100px;margin:0 auto;padding:24px}
-  .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #eee}
-  .btn{display:inline-block;padding:10px 16px;border:1px solid var(--ink);border-radius:10px;text-decoration:none}
-  .btn.primary{background:var(--gold);border-color:var(--gold);color:#fff}
-  .hero{padding:64px 0;text-align:center}
-  .hero h1{font-size:40px;margin:0 0 10px}
-  .hero p{color:var(--muted)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  .card{border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
-  .badge{font-size:12px;background:#f7f7f7;border:1px solid #eee;padding:4px 8px;border-radius:999px}
-  .notice{border-left:4px solid var(--gold);background:#fff8e6;padding:12px 16px;border-radius:8px;margin:12px 0}
-  table{width:100%;border-collapse:collapse}
-  th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
-  .kudos{display:flex;gap:8px;flex-wrap:wrap}
-  footer{border-top:1px solid #eee;margin-top:32px;padding:24px;text-align:center;color:#777}
-  blockquote,pre{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:8px}
+    :root { --gold:#d4af37; --ink:#1d1d1f; --muted:#666; --bg:#fff; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink)}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #eee}
+    .btn{display:inline-block;padding:10px 16px;border:1px solid var(--ink);border-radius:10px;text-decoration:none;cursor:pointer}
+    .btn.primary{background:var(--gold);border-color:var(--gold);color:#fff}
+    .hero{padding:64px 0;text-align:center}
+    .hero h1{font-size:40px;margin:0 0 10px}
+    .hero p{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .card{border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+    .badge{font-size:12px;background:#f7f7f7;border:1px solid #eee;padding:4px 8px;border-radius:999px}
+    .notice{border-left:4px solid var(--gold);background:#fff8e6;padding:12px 16px;border-radius:8px;margin:12px 0}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+    footer{border-top:1px solid #eee;margin-top:32px;padding:24px;text-align:center;color:#777}
+    blockquote,pre{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:8px}
+    textarea{border:1px solid #ddd;border-radius:8px;padding:8px;font:inherit}
+    hr{margin:16px 0;border:none;border-top:1px solid #eee}
   </style>
 </head>
 <body>
+
+  <!-- ✅ SINGLE CONFIG BLOCK (your anon key + function URLs here) -->
   <script>
   window.APP_CONFIG = {
-    stripePaymentLink: "https://buy.stripe.com/test_12345",   // replace with your real Stripe link
-    warriorPlusLink: "https://warriorplus.com/o/test",        // replace with your WarriorPlus link
-    supabaseUrl: "", supabaseAnonKey: "",
-    aiVowsUrl: "", aiSpeechUrl: "", aiShotUrl: "", aiContractUrl: ""
+    // Checkout links (optional)
+    stripePaymentLink: "https://buy.stripe.com/test_12345",
+    warriorPlusLink:  "https://warriorplus.com/o/test",
+
+    // Supabase (your project)
+    supabaseUrl: "https://nszuxsjfyhlgymabqtoy.supabase.co",
+    supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zenV4c2pmeWhsZ3ltYWJxdG95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNjA5OTgsImV4cCI6MjA3NDczNjk5OH0.PoL8rOQvFnB4JmZX9EC6OiuUOBr8xd8RIugq9ccbxiw",
+
+    // Edge Functions (already deployed)
+    aiVowsUrl:     "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-vows",
+    aiSpeechUrl:   "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-speech",
+    aiShotUrl:     "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-shotlist",
+    aiContractUrl: "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-contract"
   };
   </script>
 
@@ -52,10 +64,11 @@
     </section>
 
     <section class="notice">
-      <strong>Status:</strong> Demo mode – Supabase & AI optional
+      <strong>Status:</strong> Live AI via Supabase Edge Functions (uses anon key)
     </section>
 
     <section class="grid">
+      <!-- Snapshot -->
       <div class="card">
         <div class="badge">Snapshot</div>
         <h2 id="weddingName">—</h2>
@@ -64,118 +77,170 @@
         <p><strong>Budget Used:</strong> <span id="budgetUsed">—</span></p>
       </div>
 
+      <!-- Guests -->
       <div class="card">
         <h3>Guest List</h3>
-        <table><thead><tr><th>Name</th><th>Email</th><th>RSVP</th></tr></thead>
-        <tbody id="guestRows"></tbody></table>
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>RSVP</th></tr></thead>
+          <tbody id="guestRows"></tbody>
+        </table>
       </div>
 
+      <!-- Budget -->
       <div class="card">
         <h3>Budget</h3>
-        <table><thead><tr><th>Category</th><th>Planned</th><th>Actual</th></tr></thead>
-        <tbody id="budgetRows"></tbody></table>
+        <table>
+          <thead><tr><th>Category</th><th>Planned</th><th>Actual</th></tr></thead>
+          <tbody id="budgetRows"></tbody>
+        </table>
       </div>
 
+      <!-- Timeline -->
       <div class="card">
         <h3>Timeline</h3>
         <ul id="timelineList"></ul>
       </div>
 
+      <!-- ✅ AI Toolkit (interactive) -->
       <div class="card">
         <h3>AI Toolkit</h3>
-        <p><strong>Vows:</strong></p><blockquote id="vows"></blockquote>
-        <p><strong>Speech:</strong></p><blockquote id="speech"></blockquote>
-        <p><strong>Shot List:</strong></p><pre id="shotlist"></pre>
-        <p><strong>Contract Summary:</strong></p><blockquote id="contract"></blockquote>
+
+        <p><strong>Vows</strong></p>
+        <textarea id="vowsInput" rows="3" style="width:100%" placeholder="Optional: names, tone, length"></textarea>
+        <button id="vowsBtn" class="btn primary" style="margin-top:8px">Generate Vows</button>
+        <blockquote id="vows" style="margin-top:8px">—</blockquote>
+
+        <hr>
+
+        <p><strong>Speech</strong></p>
+        <textarea id="speechInput" rows="3" style="width:100%" placeholder="Optional: role, anecdotes"></textarea>
+        <button id="speechBtn" class="btn primary" style="margin-top:8px">Generate Speech</button>
+        <blockquote id="speech" style="margin-top:8px">—</blockquote>
+
+        <hr>
+
+        <p><strong>Shot List</strong></p>
+        <textarea id="shotInput" rows="3" style="width:100%" placeholder="Optional: venue, must-have moments"></textarea>
+        <button id="shotBtn" class="btn primary" style="margin-top:8px">Generate Shot List</button>
+        <pre id="shotlist" style="margin-top:8px;white-space:pre-wrap">—</pre>
+
+        <hr>
+
+        <p><strong>Contract Summary</strong></p>
+        <textarea id="contractInput" rows="3" style="width:100%" placeholder="Paste vendor contract (optional)"></textarea>
+        <button id="contractBtn" class="btn primary" style="margin-top:8px">Summarize Contract</button>
+        <blockquote id="contract" style="margin-top:8px">—</blockquote>
       </div>
     </section>
 
     <footer>© <span id="y"></span> Wedding MasterPlan</footer>
   </div>
 
+  <!-- Demo data render (kept so page has content even without DB) -->
   <script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-  const demo = {
-    wedding:{name:"Ariana & Malik",date:"2026-06-20",budget:25000},
-    guests:[
-      {name:"Ava Johnson",email:"ava@example.com",rsvp_status:"yes"},
-      {name:"Noah Smith",email:"noah@example.com",rsvp_status:"no"},
-      {name:"Emma Davis",email:"emma@example.com",rsvp_status:"maybe"}
-    ],
-    budget:{total:25000,items:[
-      {category:"Venue",planned:8000,actual:7800},
-      {category:"Catering",planned:7000,actual:7200},
-      {category:"Photography",planned:3000,actual:3000}
-    ]},
-    timeline:[
-      {time:"08:00",title:"Hair & Makeup"},
-      {time:"10:30",title:"Photographer arrives"},
-      {time:"15:00",title:"Ceremony"},
-      {time:"17:30",title:"Reception"}
-    ]
-  };
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-  function render(){
-    document.getElementById('weddingName').textContent = demo.wedding.name;
-    document.getElementById('weddingDate').textContent = demo.wedding.date;
-    document.getElementById('guestCount').textContent = demo.guests.length;
-    const spend = demo.budget.items.reduce((a,b)=>a+b.actual,0);
-    document.getElementById('budgetUsed').textContent = Math.round(100*spend/demo.budget.total)+"%";
+    const demo = {
+      wedding:{name:"Ariana & Malik",date:"2026-06-20",budget:25000},
+      guests:[
+        {name:"Ava Johnson",email:"ava@example.com",rsvp_status:"yes"},
+        {name:"Noah Smith",email:"noah@example.com",rsvp_status:"no"},
+        {name:"Emma Davis",email:"emma@example.com",rsvp_status:"maybe"}
+      ],
+      budget:{total:25000,items:[
+        {category:"Venue",planned:8000,actual:7800},
+        {category:"Catering",planned:7000,actual:7200},
+        {category:"Photography",planned:3000,actual:3000}
+      ]},
+      timeline:[
+        {time:"08:00",title:"Hair & Makeup"},
+        {time:"10:30",title:"Photographer arrives"},
+        {time:"15:00",title:"Ceremony"},
+        {time:"17:30",title:"Reception"}
+      ]
+    };
 
-    document.getElementById('guestRows').innerHTML = demo.guests.map(
-      g=>`<tr><td>${g.name}</td><td>${g.email}</td><td>${g.rsvp_status}</td></tr>`
-    ).join("");
+    function renderDemo(){
+      document.getElementById('weddingName').textContent = demo.wedding.name;
+      document.getElementById('weddingDate').textContent = demo.wedding.date;
+      document.getElementById('guestCount').textContent = demo.guests.length;
 
-    document.getElementById('budgetRows').innerHTML = demo.budget.items.map(
-      i=>`<tr><td>${i.category}</td><td>$${i.planned}</td><td>$${i.actual}</td></tr>`
-    ).join("");
+      const spend = demo.budget.items.reduce((a,b)=>a+b.actual,0);
+      document.getElementById('budgetUsed').textContent = Math.round(100*spend/demo.budget.total)+"%";
 
-    document.getElementById('timelineList').innerHTML = demo.timeline.map(
-      t=>`<li><strong>${t.time}</strong> – ${t.title}</li>`
-    ).join("");
+      document.getElementById('guestRows').innerHTML = demo.guests.map(
+        g=>`<tr><td>${g.name}</td><td>${g.email}</td><td>${g.rsvp_status}</td></tr>`
+      ).join("");
 
-    document.getElementById('vows').textContent="I choose you today and always... (demo)";
-    document.getElementById('speech').textContent="Good evening, family and friends... (demo)";
-    document.getElementById('shotlist').textContent="- First Look\n- Ring Exchange (demo)";
-    document.getElementById('contract').textContent="Deposit %, reschedule policy, delivery timelines (demo)";
+      document.getElementById('budgetRows').innerHTML = demo.budget.items.map(
+        i=>`<tr><td>${i.category}</td><td>$${i.planned}</td><td>$${i.actual}</td></tr>`
+      ).join("");
 
-    const C=window.APP_CONFIG;
-    if(C.stripePaymentLink) document.getElementById('buyStripe').href=C.stripePaymentLink;
-    if(C.warriorPlusLink) document.getElementById('buyWP').href=C.warriorPlusLink;
-  }
-  render();
+      document.getElementById('timelineList').innerHTML = demo.timeline.map(
+        t=>`<li><strong>${t.time}</strong> – ${t.title}</li>`
+      ).join("");
+
+      // Set buy links if provided
+      const C = window.APP_CONFIG;
+      if (C.stripePaymentLink) document.getElementById('buyStripe').href = C.stripePaymentLink;
+      if (C.warriorPlusLink)  document.getElementById('buyWP').href     = C.warriorPlusLink;
+    }
+
+    renderDemo();
   </script>
-<script>
-async function aiCall(url, prompt, outEl){
-  try{
-    outEl.textContent = "Working...";
-    const r = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type":"application/json",
-        "Authorization": "Bearer " + window.APP_CONFIG.supabaseAnonKey
-      },
-      body: JSON.stringify({ prompt })
+
+  <!-- Helper to call your Edge Functions with anon key -->
+  <script>
+    async function aiCall(url, prompt, outEl){
+      try{
+        outEl.textContent = "Working...";
+        const r = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type":"application/json",
+            "Authorization": "Bearer " + window.APP_CONFIG.supabaseAnonKey
+          },
+          body: JSON.stringify({ prompt })
+        });
+        const j = await r.json();
+        outEl.textContent = j?.data || "No response.";
+      }catch(err){
+        console.error(err);
+        outEl.textContent = "Error calling AI.";
+      }
+    }
+  </script>
+
+  <!-- Wire buttons to functions -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const C = window.APP_CONFIG || {};
+
+      // Vows
+      document.getElementById("vowsBtn")?.addEventListener("click", () => {
+        const prompt = document.getElementById("vowsInput").value || "Write short vows";
+        aiCall(C.aiVowsUrl, prompt, document.getElementById("vows"));
+      });
+
+      // Speech
+      document.getElementById("speechBtn")?.addEventListener("click", () => {
+        const prompt = document.getElementById("speechInput").value || "Write a warm 120-word intro";
+        aiCall(C.aiSpeechUrl, prompt, document.getElementById("speech"));
+      });
+
+      // Shot list
+      document.getElementById("shotBtn")?.addEventListener("click", () => {
+        const prompt = document.getElementById("shotInput").value || "List 10–15 essential wedding shots";
+        aiCall(C.aiShotUrl, prompt, document.getElementById("shotlist"));
+      });
+
+      // Contract
+      document.getElementById("contractBtn")?.addEventListener("click", () => {
+        const prompt = document.getElementById("contractInput").value || "Summarize key vendor contract terms";
+        aiCall(C.aiContractUrl, prompt, document.getElementById("contract"));
+      });
     });
-    const j = await r.json();
-    outEl.textContent = j?.data || "No response.";
-  }catch(err){
-    console.error(err);
-    outEl.textContent = "Error calling AI.";
-  }
-}
-</script>
+  </script>
+
 </body>
 </html>
-
-<script>
-window.APP_CONFIG = {
-  supabaseUrl: "https://nszuxsjfyhlgymabqtoy.supabase.co",
-  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zenV4c2pmeWhsZ3ltYWJxdG95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNjA5OTgsImV4cCI6MjA3NDczNjk5OH0.PoL8rOQvFnB4JmZX9EC6OiuUOBr8xd8RIugq9ccbxiw",
-
-  aiVowsUrl:    "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-vows",
-  aiSpeechUrl:  "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-speech",
-  aiShotUrl:    "https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-shotlist",
-  aiContractUrl:"https://nszuxsjfyhlgymabqtoy.supabase.co/functions/v1/ai-contract"
-};
-</script>
