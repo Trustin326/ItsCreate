@@ -145,6 +145,26 @@
   }
   render();
   </script>
+<script>
+async function aiCall(url, prompt, outEl){
+  try{
+    outEl.textContent = "Working...";
+    const r = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization": "Bearer " + window.APP_CONFIG.supabaseAnonKey
+      },
+      body: JSON.stringify({ prompt })
+    });
+    const j = await r.json();
+    outEl.textContent = j?.data || "No response.";
+  }catch(err){
+    console.error(err);
+    outEl.textContent = "Error calling AI.";
+  }
+}
+</script>
 </body>
 </html>
 
