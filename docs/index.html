@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedding MasterPlan — Teal Edition</title>
+<style>
+:root{
+  --teal:#0ea5a8; /* teal */
+  --teal-dark:#0c8e90;
+  --ink:#0b0b0c;  /* black-ish text */
+  --bg:#ffffff;   /* white */
+  --muted:#667085;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+a{text-decoration:none;color:inherit}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.nav .brand{font-weight:800;letter-spacing:.3px}
+.btn{display:inline-block;padding:12px 18px;border:1px solid var(--ink);border-radius:12px}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.ghost{border-color:#d0d5dd;color:var(--ink);background:#fff}
+.btn:active{transform:translateY(1px)}
+.badge{font-size:12px;padding:4px 10px;border:1px solid #d0d5dd;border-radius:999px;background:#f9fafb;color:#344054}
+
+.hero{
+  position:relative;
+  color:#fff;
+  display:grid;place-items:center;
+  min-height:56vh;
+  text-align:center;
+  overflow:hidden;
+}
+.hero img.bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(1.2);
+}
+.hero .glass{
+  position:relative;z-index:1;
+  backdrop-filter:saturate(120%) blur(2px);
+  background:rgba(14,165,168,.15);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:16px;
+  padding:28px;
+  max-width:840px;margin:0 16px;
+}
+.hero h1{font-size:44px;margin:8px 0 10px;font-weight:900;line-height:1.08}
+.hero p{font-size:18px;color:#e7f9fa;margin:0 0 16px}
+.hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.section{padding:40px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{border:1px solid #e5e7eb;border-radius:14px;padding:16px;background:#fff;box-shadow:0 2px 10px rgba(3,7,18,.04)}
+.card h3{margin:6px 0 8px}
+.kudos{display:flex;gap:8px;flex-wrap:wrap}
+.notice{border-left:4px solid var(--teal);background:#ecfeff;padding:14px 16px;border-radius:10px;margin:12px 0;color:#064e53}
+h2.section-title{font-size:28px;margin:0 0 12px}
+.small{font-size:13px;color:var(--muted)}
+footer{border-top:1px solid #e5e7eb;margin-top:36px;padding:24px;text-align:center;color:#6b7280}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:8px;border-bottom:1px solid #f1f5f9;text-align:left}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.gallery img{width:100%;height:220px;object-fit:cover;border-radius:12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{padding:8px 12px;border:1px solid #d0d5dd;border-radius:10px;background:#fff;cursor:pointer}
+.tab.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.ghost-link{color:var(--teal);font-weight:600}
+pre,blockquote{background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:10px;white-space:pre-wrap}
+</style>
+</head>
+<body>
+
+<script>
+/* === CONFIG: set your real links here === */
+window.APP_CONFIG = {
+  stripePaymentLink: "https://buy.stripe.com/test_12345",  // <-- put your live Payment Link
+  warriorPlusLink:  "https://warriorplus.com/o/test"       // <-- or your WarriorPlus offer
+};
+</script>
+
+<!-- NAV -->
+<div class="container">
+  <div class="nav">
+    <div class="brand">Wedding <span style="color:var(--teal)">MasterPlan</span></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a id="buyStripeTop" class="btn primary" href="#">Buy Now</a>
+      <a id="buyWPTop" class="btn ghost" href="#">Buy on WarriorPlus</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="bg" src="https://images.unsplash.com/photo-1520848315518-b991dd16a6cf?q=80&w=1920&auto=format&fit=crop" alt="Wedding couple background">
+  <div class="glass">
+    <div class="badge">💍 Teal • White • Black</div>
+    <h1>Plan Your Entire Wedding in One Elegant Dashboard</h1>
+    <p>Timelines, budget, RSVPs, seating, design, and AI — try the full demo below.</p>
+    <div class="cta">
+      <a class="btn primary" href="#demo">Try the Live Demo</a>
+      <a id="buyStripeHero" class="btn ghost" href="#">Buy Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE GALLERY (couples) -->
+<div class="container section">
+  <h2 class="section-title">Style Inspiration</h2>
+  <p class="small">A few looks to spark ideas for your day.</p>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop" alt="Couple 1">
+    <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=1200&auto=format&fit=crop" alt="Couple 2">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Couple 3">
+    <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?q=80&w=1200&auto=format&fit=crop" alt="Couple 4">
+  </div>
+</div>
+
+<!-- FEATURES BLURB -->
+<div class="container section">
+  <div class="grid">
+    <div class="card"><h3>Smart Timeline</h3><p>Auto-builds 12–18 month plan with reminders. Export day-of schedule as .ics.</p></div>
+    <div class="card"><h3>Budget & Vendors</h3><p>Track spend, compare vendors, and keep contracts in one spot.</p></div>
+    <div class="card"><h3>Guest & Seating</h3><p>RSVP tracking, dietary notes, and a simple table planner.</p></div>
+    <div class="card"><h3>Design & Moodboard</h3><p>Upload inspo and lock a palette; teal/white/black ready.</p></div>
+    <div class="card"><h3>Collaboration</h3><p>Share links with your planner, venue, and key vendors.</p></div>
+    <div class="card"><h3>AI Toolkit</h3><p>Draft vows, speeches, shot lists, and contract summaries (demo on this page).</p></div>
+  </div>
+</div>
+
+<!-- DEMO -->
+<div id="demo" class="container section">
+  <h2 class="section-title">Live Demo</h2>
+  <div class="notice"><strong>Status:</strong> Demo mode — all features work here with sample data.</div>
+
+  <div class="grid">
+    <!-- Snapshot -->
+    <div class="card">
+      <div class="badge">Snapshot</div>
+      <h3 id="weddingName">—</h3>
+      <p><strong>Date:</strong> <span id="weddingDate">—</span></p>
+      <p><strong>Guests (Yes):</strong> <span id="guestCount">—</span></p>
+      <p><strong>Budget Used:</strong> <span id="budgetUsed">—</span></p>
+      <div class="kudos">
+        <a class="ghost-link" href="#" id="dlIcs">Download day-of .ics</a>
+      </div>
+    </div>
+
+    <!-- Guests -->
+    <div class="card">
+      <h3>Guest List & RSVP</h3>
+      <table class="table">
+        <thead><tr><th>Name</th><th>Email</th><th>RSVP</th><th>Dietary</th></tr></thead>
+        <tbody id="guestRows"></tbody>
+      </table>
+      <p class="small">Shows first 20 in demo.</p>
+    </div>
+
+    <!-- Budget -->
+    <div class="card">
+      <h3>Budget</h3>
+      <table class="table">
+        <thead><tr><th>Category</th><th>Planned</th><th>Actual</th></tr></thead>
+        <tbody id="budgetRows"></tbody>
+      </table>
+      <div id="budgetBadges" class="kudos" style="margin-top:6px"></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="card">
+      <h3>Day-Of Timeline</h3>
+      <ul id="timelineList"></ul>
+    </div>
+
+    <!-- AI Toolkit -->
+    <div class="card">
+      <h3>AI Toolkit (Demo)</h3>
+      <div class="tabs">
+        <button class="tab active" data-tab="vows">Vows</button>
+        <button class="tab" data-tab="speech">Speech</button>
+        <button class="tab" data-tab="shotlist">Shot List</button>
+        <button class="tab" data-tab="contract">Contract Summary</button>
+      </div>
+      <div id="ai-vows" class="ai-panel"><blockquote id="vows"></blockquote></div>
+      <div id="ai-speech" class="ai-panel" style="display:none"><blockquote id="speech"></blockquote></div>
+      <div id="ai-shotlist" class="ai-panel" style="display:none"><pre id="shotlist"></pre></div>
+      <div id="ai-contract" class="ai-panel" style="display:none"><blockquote id="contract"></blockquote></div>
+      <p class="small">This page uses polished demo copy; connect your AI backend later if you want dynamic text.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+    <a id="buyStripeBottom" class="btn primary" href="#">Buy Now</a>
+    <a id="buyWPBottom" class="btn ghost" href="#">Buy on WarriorPlus</a>
+  </div>
+</div>
+
+<footer>© <span id="y"></span> Wedding MasterPlan</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+
+const demo = {
+  wedding:{name:"Ariana & Malik",date:"2026-06-20",budget:25000},
+  guests:[
+    {name:"Ava Johnson",email:"ava@example.com",rsvp_status:"yes",dietary:"vegetarian"},
+    {name:"Noah Smith",email:"noah@example.com",rsvp_status:"no",dietary:""},
+    {name:"Emma Davis",email:"emma@example.com",rsvp_status:"maybe",dietary:"gluten-free"},
+    {name:"Lucas Brown",email:"lucas@example.com",rsvp_status:"yes",dietary:""},
+    {name:"Mia Wilson",email:"mia@example.com",rsvp_status:"yes",dietary:"vegan"},
+    {name:"Ethan Garcia",email:"ethan@example.com",rsvp_status:"maybe",dietary:""},
+    {name:"Sophia Lee",email:"sophia@example.com",rsvp_status:"yes",dietary:"vegetarian"},
+    {name:"James Clark",email:"james@example.com",rsvp_status:"no",dietary:""},
+    {name:"Isabella Hall",email:"isa@example.com",rsvp_status:"yes",dietary:"gluten-free"},
+    {name:"Benjamin Young",email:"ben@example.com",rsvp_status:"yes",dietary:""}
+  ],
+  budget:{total:25000,items:[
+    {category:"Venue",planned:8000,actual:7800},
+    {category:"Catering",planned:7000,actual:7200},
+    {category:"Photography",planned:3000,actual:3000},
+    {category:"Florals",planned:1800,actual:1600},
+    {category:"Music",planned:1500,actual:1700},
+    {category:"Attire",planned:2000,actual:1800},
+    {category:"Stationery",planned:700,actual:600},
+    {category:"Misc",planned:1000,actual:900}
+  ]},
+  timeline:[
+    {time:"08:00",title:"Hair & Makeup begins"},
+    {time:"10:30",title:"Photographer arrives"},
+    {time:"13:00",title:"First Look"},
+    {time:"15:00",title:"Ceremony"},
+    {time:"16:00",title:"Cocktail Hour"},
+    {time:"17:30",title:"Reception & Dinner"},
+    {time:"20:00",title:"Cake Cutting"},
+    {time:"22:00",title:"Last Dance & Exit"}
+  ]
+};
+
+function render(){
+  // Snapshot
+  document.getElementById('weddingName').textContent = demo.wedding.name;
+  document.getElementById('weddingDate').textContent = demo.wedding.date;
+  const yes = demo.guests.filter(g=>g.rsvp_status==='yes').length;
+  document.getElementById('guestCount').textContent = `${demo.guests.length} (${yes} yes)`;
+  const spend = demo.budget.items.reduce((a,b)=>a+b.actual,0);
+  document.getElementById('budgetUsed').textContent = Math.round(100*spend/demo.budget.total)+"%";
+
+  // Guests
+  document.getElementById('guestRows').innerHTML = demo.guests
+    .slice(0,20)
+    .map(g=>`<tr><td>${g.name}</td><td>${g.email}</td><td>${g.rsvp_status}</td><td>${g.dietary||"-"}</td></tr>`)
+    .join("");
+
+  // Budget
+  document.getElementById('budgetRows').innerHTML = demo.budget.items
+    .map(i=>`<tr><td>${i.category}</td><td>$${i.planned.toLocaleString()}</td><td>$${i.actual.toLocaleString()}</td></tr>`)
+    .join("");
+  document.getElementById('budgetBadges').innerHTML =
+    `<span class="badge">Total $${demo.budget.total.toLocaleString()}</span>`;
+
+  // Timeline
+  document.getElementById('timelineList').innerHTML = demo.timeline
+    .map(t=>`<li><strong>${t.time}</strong> – ${t.title}</li>`)
+    .join("");
+
+  // AI demo copy
+  document.getElementById('vows').textContent =
+    "I promise to choose us on the easy days and the hard ones — to build a home of laughter, patience, and wonder. (demo)";
+  document.getElementById('speech').textContent =
+    "Good evening, everyone. If love is a team sport, these two are playing like champions — kind, resilient, and always choosing each other. (demo)";
+  document.getElementById('shotlist').textContent =
+    "- First Look\n- Ring Exchange close-up\n- The Kiss (wide + tight)\n- Parents with couple\n- Golden hour portraits\n- Toast reactions\n- Candid dance floor (demo)";
+  document.getElementById('contract').textContent =
+    "Key terms to confirm: deposit %, reschedule/cancellation policy, delivery timelines, editing/usage rights, force majeure, liability limits. (demo)";
+
+  // .ics export
+  document.getElementById('dlIcs').onclick = ()=>{
+    const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wedding MasterPlan//EN'];
+    demo.timeline.forEach(t=>{
+      lines.push('BEGIN:VEVENT');
+      lines.push('SUMMARY:' + t.title);
+      lines.push('DTSTART:20260620T' + t.time.replace(':','') + '00');
+      lines.push('DTEND:20260620T' + t.time.replace(':','') + '59');
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    const blob = new Blob([lines.join('\r\n')], {type:'text/calendar'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'wedding-day.ics';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  // Buy buttons
+  const C = window.APP_CONFIG || {};
+  const stripe = C.stripePaymentLink || "";
+  const wp = C.warriorPlusLink || "";
+  const setOrHide = (id, url)=>{
+    const el = document.getElementById(id);
+    if(url){ el.href = url; } else { el.style.display='none'; }
+  };
+  setOrHide('buyStripeTop', stripe);
+  setOrHide('buyWPTop', wp);
+  setOrHide('buyStripeHero', stripe);
+  setOrHide('buyStripeBottom', stripe);
+  setOrHide('buyWPBottom', wp);
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const map = {vows:'ai-vows', speech:'ai-speech', shotlist:'ai-shotlist', contract:'ai-contract'};
+      Object.values(map).forEach(id=>document.getElementById(id).style.display='none');
+      document.getElementById(map[btn.dataset.tab]).style.display='block';
+    });
+  });
+}
+render();
+</script>
+
+</body>
+</html>
